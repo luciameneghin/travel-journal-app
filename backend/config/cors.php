@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/config.php';
+require_once __DIR__ . '/config.php';
 
 // 1) Recupera l'origin della richiesta
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
