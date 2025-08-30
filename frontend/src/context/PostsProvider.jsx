@@ -7,7 +7,7 @@ export function PostsProvider({ children }) {
   const api = useApi();
 
   const [items, setItems] = useState([]);
-
+  const [byId, setById] = useState({})
 
   const [error, setError] = useState(null);
 
@@ -23,6 +23,15 @@ export function PostsProvider({ children }) {
     }
   }, [api]);
 
+  //fetch post singolo
+  const getPostById = useCallback(async (id) => {
+    if (byId[id]) return byId[id]
+    const { data } = await api.get('/posts/get.php', { params: { id } })
+    setById(prev => ({ ...prev, [id]: data }))
+    return data
+  }, [api, byId])
+
+
   useEffect(() => {
     fetchList();
   }, [fetchList]);
@@ -30,8 +39,9 @@ export function PostsProvider({ children }) {
 
   const value = useMemo(() => ({
     items,
-    fetchList
-  }), [items, fetchList])
+    fetchList,
+    getPostById,
+  }), [items, fetchList, getPostById])
 
   return (
     <PostsContext.Provider value={value}>
