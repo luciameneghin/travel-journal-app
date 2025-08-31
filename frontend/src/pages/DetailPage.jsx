@@ -43,6 +43,20 @@ const DetailPage = () => {
         {typeof post.costEUR === 'number' && <span>€{post.costEUR.toFixed(2)}</span>}
       </div>
 
+      {media.length > 0 ? (
+
+        <ul className="mt-3 space-y-2">
+          {media.map((m, i) => (
+            <li key={i} >
+              <img src={m.url} alt={m.title} className='w-[300px] rounded-xl border object-cover' />
+            </li>
+          ))}
+        </ul>
+
+      ) : (
+        <p className="mt-8 text-sm text-gray-500 italic">Nessuna immagine per il post</p>
+      )}
+
       <p className="mt-6 whitespace-pre-wrap leading-relaxed text-gray-800">
         {post.description}
       </p>
@@ -60,20 +74,7 @@ const DetailPage = () => {
         </>
       )}
 
-      {media.length > 0 && (
-        <>
-          <h2 className="mt-8 text-lg font-semibold">Media</h2>
-          <ul className="mt-3 space-y-2">
-            {media.map((m, i) => (
-              <li key={i} className="text-indigo-600 underline break-all">
-                <a href={m.url} target="_blank" rel="noreferrer">
-                  {m.type} — {m.url}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+
     </div>
   )
 }
