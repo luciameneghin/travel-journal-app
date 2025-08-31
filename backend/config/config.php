@@ -9,3 +9,4 @@ const ALLOWED_ORIGINS = [
   "http://127.0.0.1:5173",
 ];
 const UPLOAD_DIR = __DIR__ . '/../public/uploads';
+const BASE_URL = "http://localhost:8000";

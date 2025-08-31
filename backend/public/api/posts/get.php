@@ -77,6 +77,25 @@ foreach ($mediaRows as $m) {
   ];
 }
 
+$media = [];
+$base  = rtrim(BASE_URL, '/');
+$path  = '/src/images/';
+
+foreach ($mediaRows as $m) {
+  $filename = trim($m['url'] ?? '');
+  $url = (stripos($filename, 'http') === 0)
+    ? $filename
+    : $base . $path . rawurlencode($filename); // http://localhost:8000/src/images/example.jpg
+
+  $media[] = [
+    'type'   => $m['type'],
+    'source' => $m['source'],
+    'url'    => $url,                      // <-- sempre assoluto
+  ];
+}
+
+
+
 // Mappa DB
 $post = [
   'id'              => (int)$row['id'],
